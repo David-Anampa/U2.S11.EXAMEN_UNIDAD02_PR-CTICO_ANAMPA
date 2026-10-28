@@ -1,0 +1,17 @@
+HTTP/1.1 200 OK
+Server: nginx/1.20.2
+Date: Wed, 28 Oct 2026 21:11:57 GMT
+Content-Type: text/html
+Content-Length: 1273
+Last-Modified: Wed, 28 Oct 2026 19:27:42 GMT
+Connection: keep-alive
+ETag: "6ae24cae-4f9"
+X-Powered-By: PHP/7.4.3
+Set-Cookie: PHPSESSID=8f3a1c9e2b7d4a60e5; path=/
+Accept-Ranges: bytes
+
+ANÁLISIS DEL AUDITOR (WSTG-INFO-02):
+- Servidor web detectado: nginx/1.20.2. Lanzado en noviembre de 2021; la rama 1.20 se encuentra en estado de Fin de Vida (EOL - End of Life) y no recibe mantenimiento oficial.
+- Lenguaje backend detectado: PHP/7.4.3 en cabecera X-Powered-By.
+- Soporte vigente de PHP 7.4: Alcanzó su fin de soporte oficial (EOL) el 28 de noviembre de 2022. Lleva casi 4 años sin parches de seguridad, manteniendo múltiples vulnerabilidades conocidas sin corregir.
+- Contraste con D2: NO COINCIDE (D2 FALSA). El proveedor aseguró utilizar versiones vigentes del servidor y lenguaje.

@@ -1,0 +1,45 @@
+== /citas/
+<form method="get" action="http://portal.clinica-santalucia.test/citas/registrar.php">
+<input type="text" name="nombres" placeholder="Nombres y apellidos">
+<input type="text" name="dni" placeholder="DNI">
+<input type="date" name="fecha_nacimiento">
+<input type="text" name="telefono" placeholder="Celular">
+<input type="email" name="correo" placeholder="Correo">
+<select name="especialidad">
+<option>Medicina general
+<option>Pediatría
+<option>Ginecología
+<option>Psiquiatría
+<textarea name="motivo_consulta" placeholder="Describa sus síntomas">
+<input type="hidden" name="medico_id" value="17">
+<input type="checkbox" name="acepto" value="1">
+== /resultados/
+<form method="post" action="http://portal.clinica-santalucia.test/resultados/ver.php">
+<input type="text" name="dni" placeholder="DNI del paciente">
+<input type="password" name="clave" placeholder="Contraseña">
+== /postula/
+<form method="post" enctype="multipart/form-data" action="http://portal.clinica-santalucia.test/wp-admin/admin-ajax.php">
+<input type="text" name="nombres" placeholder="Nombres y apellidos">
+<input type="text" name="dni" placeholder="DNI">
+<input type="email" name="correo" placeholder="Correo">
+<input type="file" name="cv">
+== /admin/
+<form method="post" action="http://portal.clinica-santalucia.test/admin/login.php">
+<input type="text" name="usuario" placeholder="Usuario">
+<input type="password" name="clave" placeholder="Contraseña">
+
+ANÁLISIS DEL AUDITOR (WSTG-INFO-06):
+- Cantidad de formularios: 4 formularios identificados.
+- Formularios que solicitan datos personales:
+  * /citas/: nombres, DNI, fecha de nacimiento, celular, correo.
+  * /resultados/: DNI del paciente.
+  * /postula/: nombres, DNI, correo personal.
+- Formulario que solicita datos de salud (sensibles):
+  * /citas/: solicita la especialidad médica y la descripción de síntomas en el campo motivo_consulta. Según el art. 13.6 de la Ley 29733 son datos de salud de categoría especial.
+- Formulario que recibe archivos:
+  * /postula/: campo de tipo file (name="cv") que envía al endpoint administrativo /wp-admin/admin-ajax.php.
+- Formulario que transmite datos con método GET:
+  * /citas/: utiliza method="get", provocando que el DNI, celular, fecha de nacimiento y síntomas de salud viajen visibles en la URL (filtrándose en historial, logs de Nginx y proxies).
+- Protocolo de action: Todos los formularios envían la información hacia URLs http:// no cifradas, exponiendo los datos a interceptación (Man-in-the-Middle).
+- Consentimiento informado: Checkbox 'acepto' carece de texto legal vinculante o enlace a política de privacidad (infracción a Ley 29733).
+- Contraste con D7: NO COINCIDE (D7 FALSA). El proveedor declaró que los formularios no exponen datos de pacientes.

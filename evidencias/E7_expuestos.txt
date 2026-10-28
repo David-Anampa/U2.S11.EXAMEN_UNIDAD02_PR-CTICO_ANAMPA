@@ -1,0 +1,21 @@
+<html>
+<head><title>Index of /respaldos/</title></head>
+<body>
+<h1>Index of /respaldos/</h1><hr><pre><a href="../">../</a>
+<a href="citas_export_2026-08.csv">citas_export_2026-08.csv</a>                           01-Sep-2026 23:05                  91
+<a href="portal_2025-09-30.sql.gz">portal_2025-09-30.sql.gz</a>                           01-Oct-2025 04:30                 101
+<a href="portal_2026-03-31.sql.gz">portal_2026-03-31.sql.gz</a>                           01-Apr-2026 04:30                 101
+<a href="wp-config.php.bak">wp-config.php.bak</a>                                  02-Oct-2025 15:15                  90
+</pre><hr></body>
+</html>
+/admin/  HTTP 200
+
+ANÁLISIS DEL AUDITOR (WSTG-CONF-04 y WSTG-CONF-05):
+- Directorio /respaldos/ expuesto: Lista 4 archivos confidenciales accesibles públicamente con 'autoindex' activado:
+  1) citas_export_2026-08.csv: Archivo CSV con exportación masiva de citas de pacientes.
+  2) portal_2025-09-30.sql.gz: Copia de seguridad comprimida de la base de datos MySQL de 2025.
+  3) portal_2026-03-31.sql.gz: Copia de seguridad comprimida de la base de datos MySQL de 2026.
+  4) wp-config.php.bak: Respaldo del archivo de configuración con credenciales de base de datos en texto plano y llaves criptográficas.
+- Interfaz de administración /admin/: Responde HTTP 200 abierta a todo internet con formulario de autenticación, sin lista blanca de IPs ni restricción perimetral.
+- Principio ético de auditoría: En estricto cumplimiento del alcance autorizado y buenas prácticas, NO se procedió a descargar los archivos; la captura del listado de servidor constituye la evidencia objetiva suficiente.
+- Contraste con D5 y D6: NO COINCIDE (D5 y D6 FALSAS). El proveedor afirmó que /admin/ solo era accesible desde su red interna (D5) y que los respaldos se guardaban fuera del servidor web (D6).

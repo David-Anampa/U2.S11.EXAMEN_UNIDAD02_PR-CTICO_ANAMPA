@@ -1,0 +1,16 @@
+User-agent: *
+Disallow: /admin/
+Disallow: /respaldos/
+Disallow: /resultados/
+Disallow: /wp-content/plugins/wp-file-manager/
+Sitemap: http://portal.clinica-santalucia.test/sitemap.xml
+security.txt  HTTP 404
+
+ANÁLISIS DEL AUDITOR (WSTG-INFO-03):
+- Rutas no indexables en robots.txt: 4 rutas sensibles:
+  1) /admin/ (interfaz administrativa de autenticación)
+  2) /respaldos/ (directorio de copias de seguridad de bases de datos)
+  3) /resultados/ (módulo de acceso a resultados de laboratorio)
+  4) /wp-content/plugins/wp-file-manager/ (ruta del plugin con vulnerabilidad conocida)
+- Archivo security.txt: Inexistente (HTTP 404 en /.well-known/security.txt), incumpliendo RFC 9116 y buenas prácticas de divulgación de vulnerabilidades.
+- Perspectiva del atacante: El archivo robots.txt actúa como un mapa directo hacia los activos más sensibles y vulnerables de la infraestructura, evidenciando exactamente qué áreas críticas el proveedor intentó ocultar de los motores de búsqueda sin implementar un control de acceso real. Además, el sitemap referencia URLs con protocolo inseguro HTTP.

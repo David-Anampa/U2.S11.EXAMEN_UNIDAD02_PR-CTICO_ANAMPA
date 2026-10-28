@@ -1,0 +1,20 @@
+127.0.0.1:8080  HTTP 200
+127.0.0.1:8081  HTTP 200
+127.0.0.1:8088  HTTP 200
+<div style="background:#c00;color:#fff;padding:6px">ENTORNO DE PRUEBAS · WebSur S.A.C.</div>
+<!-- Base de datos: copia de producción restaurada el 12/09/2026 para pruebas de la nueva agenda -->
+<!-- usuario de pruebas: admin_pruebas -->
+{
+  "servicio": "api-citas",
+  "version": "1.4.0",
+  "entorno": "produccion",
+  "endpoints": ["/v1/citas", "/v1/pacientes", "/v1/resultados"],
+  "documentacion": "/swagger/"
+}
+
+ANÁLISIS DEL AUDITOR (WSTG-INFO-04):
+- Aplicaciones que responden: 3 aplicaciones en los puertos 8080 (portal web institucional), 8081 (entorno de pruebas) y 8088 (API REST).
+- Declaración D1 del proveedor: El proveedor declaró un solo activo publicado. En la realidad existen 3 servicios expuestos.
+- Contraste con D1: NO COINCIDE (D1 FALSA). Dos servicios estaban operando sin conocimiento de la clínica.
+- Datos del entorno de pruebas (:8081): El código HTML revela que contiene una 'copia de producción restaurada el 12/09/2026', exponiendo datos reales de pacientes con un usuario activo 'admin_pruebas'.
+- Entorno de la API (:8088): La API declara en su raíz JSON 'entorno': 'produccion', exponiendo endpoints sensibles (/v1/citas, /v1/pacientes, /v1/resultados) y documentación swagger accesible públicamente.

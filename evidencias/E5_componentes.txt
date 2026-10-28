@@ -1,0 +1,18 @@
+/wp-content/themes/medicalpro/style.css?ver=2.1.0
+/wp-content/plugins/contact-form-7/includes/css/styles.css?ver=5.3.1
+/wp-includes/js/jquery/jquery.min.js?ver=3.4.1
+/wp-content/plugins/wp-file-manager/lib/js/elfinder.min.js?ver=6.8
+
+ANÁLISIS DEL AUDITOR (WSTG-INFO-08):
+- Versión de WordPress: WordPress 5.8.1 (publicada en septiembre de 2021). El proveedor declaró versión 6.6 en D1.
+- Componentes identificados y versiones:
+  * Tema MedicalPro v2.1.0
+  * Plugin Contact Form 7 v5.3.1 (desactualizado)
+  * Librería jQuery v3.4.1 (desactualizada; afectada por CVE-2020-11022 y CVE-2020-11023 con riesgo de XSS)
+  * Plugin WP File Manager v6.8
+- Vulnerabilidad crítica identificada:
+  * Componente: WP File Manager 6.8
+  * CVE: CVE-2020-25213
+  * Severidad: Crítica (CVSS v3 9.8 / 10.0)
+  * Descripción: Permite la ejecución remota de código (RCE) no autenticada mediante la subida de archivos PHP arbitrarios a través de la librería elFinder integrada.
+- Contraste con D3: NO COINCIDE (D3 FALSA). El proveedor aseguró que el CMS y plugins se actualizan mensualmente. La versión instalada tiene más de 4 años de obsolescencia y un exploit público crítico.

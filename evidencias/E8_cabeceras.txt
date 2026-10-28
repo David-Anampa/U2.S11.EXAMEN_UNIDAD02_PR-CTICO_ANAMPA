@@ -1,0 +1,21 @@
+Strict-Transport-Security: AUSENTE
+Content-Security-Policy: AUSENTE
+X-Frame-Options: AUSENTE
+X-Content-Type-Options: AUSENTE
+Set-Cookie: PHPSESSID=8f3a1c9e2b7d4a60e5; path=/
+HTTPS 127.0.0.1:443  HTTP 000
+
+ANÁLISIS DEL AUDITOR (WSTG-CONF-07, WSTG-CONF-12 y WSTG-SESS-02):
+- Cabeceras de seguridad ausentes: 4 de 4 cabeceras defensivas están ausentes:
+  * Strict-Transport-Security (HSTS): No implementada.
+  * Content-Security-Policy (CSP): No implementada.
+  * X-Frame-Options: No implementada (vulnerable a Clickjacking).
+  * X-Content-Type-Options: No implementada (vulnerable a MIME-sniffing).
+- Deficiencias en Cookie de sesión (PHPSESSID):
+  * Carece de la bandera 'Secure' (se transmite en texto claro por HTTP).
+  * Carece de la bandera 'HttpOnly' (accesible desde JavaScript, vulnerable a robo por XSS).
+  * Carece del atributo 'SameSite' (vulnerable a ataques de Cross-Site Request Forgery - CSRF).
+  * Valor de sesión estático/fijo (8f3a1c9e2b7d4a60e5), lo que implica fijación de sesión y secuestro inmediato.
+- Conectividad HTTPS: La petición a HTTPS en el puerto 443 responde 'HTTP 000' (no existe certificado ni servicio TLS escuchando).
+- Configuración CORS en API (:8088): La API expone 'Access-Control-Allow-Origin: *', permitiendo que cualquier dominio malicioso lea respuestas de la API en el navegador del usuario.
+- Contraste con D4: NO COINCIDE (D4 FALSA). El proveedor afirmó falsamente tener HTTPS y cabeceras de seguridad configuradas.

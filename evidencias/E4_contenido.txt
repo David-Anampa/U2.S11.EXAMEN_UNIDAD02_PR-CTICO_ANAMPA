@@ -1,0 +1,15 @@
+5:<meta name="generator" content="WordPress 5.8.1">
+11:<!-- Sitio desarrollado por WebSur S.A.C. · soporte@websur.test -->
+12:<!-- TODO: eliminar el usuario admin_pruebas antes de pasar a producción -->
+26:<!-- integración con el sistema de laboratorio: http://10.20.0.15:8090/lis/resultados -->
+10:<p>Su contraseña inicial es su fecha de nacimiento (ddmmaaaa). ¿La olvidó? Escríbanos al WhatsApp de la clínica.</p>
+11:<!-- los resultados se muestran en ver.php?orden=NNNNN -->
+
+ANÁLISIS DEL AUDITOR (WSTG-INFO-05):
+- Fugas de información en comentarios HTML: Se detectaron 5 comentarios/elementos reveladores:
+  1) Línea 11 de index: Correo de contacto del proveedor (soporte@websur.test).
+  2) Línea 12 de index: Tarea técnica pendiente que expone la existencia del usuario 'admin_pruebas'.
+  3) Línea 26 de index: Dirección IP interna y puerto del sistema de laboratorio LIS (http://10.20.0.15:8090/lis/resultados), exponiendo la arquitectura interna de red para ataques de SSRF.
+  4) Línea 11 de /resultados/: Exposición de la estructura de URLs privadas: 'ver.php?orden=NNNNN', revelando una vulnerabilidad de IDOR (Referencia Directa Insegura a Objetos) por identificador secuencial.
+- Contraseña inicial de pacientes: La contraseña por defecto es la fecha de nacimiento en formato 'ddmmaaaa' (8 dígitos). Es extremadamente predecible, carece de complejidad y permite a un tercero adivinar claves o forzarlas masivamente para acceder a historiales médicos (Ley 29733).
+- Contraste con D8: NO COINCIDE (D8 FALSA). El proveedor declaró código limpio sin comentarios ni datos internos.
